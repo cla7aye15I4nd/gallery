@@ -171,53 +171,29 @@
     </div>
   </div>
 
-  <div class="gallery">
-    <div class="card">
-      <img src="imgs/mqbb.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/fufu.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/paris_m.JPG" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/star.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/watercolor1.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/hengbing.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/watercolor2.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/tired.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/duofubaiya.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/srd.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/hm1.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/london.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/yuzi.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/cat.jpg" alt="">
-    </div>
-    <div class="card">
-      <img src="imgs/huima2.jpg" alt="">
-    </div>
+  <div class="gallery" id="gallery">
+    <!-- JavaScript will generate image cards here -->
   </div>
+
+  <script>
+    const gallery = document.getElementById('gallery');
+    const images = Array.from({ length: 16 }, (_, i) => i + 1);
+
+    // Shuffle the images array
+    for (let i = images.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [images[i], images[j]] = [images[j], images[i]];
+    }
+
+    // Generate the image cards in random order
+    images.forEach(num => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `<img src="imgs/${num}.jpg" alt="Image ${num}">`;
+      gallery.appendChild(card);
+    });
+
+  </script>
 
 </body>
 
