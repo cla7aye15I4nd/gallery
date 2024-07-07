@@ -162,24 +162,27 @@
       /* Full height */
       overflow: auto;
       /* Enable scroll if needed */
-      background-color: rgb(0, 0, 0);
-      /* Fallback color */
-      background-color: rgba(0, 0, 0, 0.9);
-      /* Black w/ opacity */
+      background-color: rgba(255, 255, 255, 0.9);
+      /* White with slight transparency */
     }
 
     .modal-content {
+      position: relative;
+      background-color: #fefefe;
       margin: auto;
-      display: block;
+      padding: 0;
+      border: 1px solid #888;
       width: 80%;
       max-width: 700px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
     }
 
     .close {
       position: absolute;
       top: 15px;
       right: 35px;
-      color: #f1f1f1;
+      color: #333;
       font-size: 40px;
       font-weight: bold;
       transition: 0.3s;
@@ -190,6 +193,27 @@
       color: #bbb;
       text-decoration: none;
       cursor: pointer;
+    }
+
+    .modal-image {
+      width: 100%;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .modal-description {
+      padding: 1em;
+    }
+
+    .modal-description h2 {
+      margin: 0 0 10px 0;
+      font-size: 1.5em;
+    }
+
+    .modal-description p {
+      margin: 0;
+      font-size: 1em;
+      color: #666;
     }
   </style>
 
@@ -224,8 +248,14 @@
   </div>
 
   <div id="imageModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="modalImage">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img id="modalImage" class="modal-image">
+      <div class="modal-description">
+        <h2 id="modalTitle">Title</h2>
+        <p id="modalText">Description or tags can go here.</p>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -251,11 +281,15 @@
 
     // Get the image and insert it inside the modal - use its "alt" text as a caption
     const modalImg = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
 
     document.querySelectorAll('.card img').forEach(img => {
       img.addEventListener('click', function () {
         modal.style.display = "block";
         modalImg.src = this.src;
+        modalTitle.textContent = "Image " + this.alt.split(" ")[1]; // Example title
+        modalText.textContent = "Description for " + this.alt.split(" ")[1]; // Example description
       });
     });
 
@@ -274,7 +308,6 @@
       }
     }
   </script>
-
 </body>
 
 </html>
