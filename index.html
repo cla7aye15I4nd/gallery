@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
   <title> Gallery </title>
   <style>
     body,
@@ -93,6 +94,13 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       overflow: hidden;
+      transition: transform 0.3s ease;
+      /* Smooth transition for transform property */
+    }
+
+    .card:hover {
+      transform: scale(2.1);
+      /* Zoom out the card on hover */
     }
 
     .card img {
@@ -116,33 +124,34 @@
     .card-text {
       margin: 0;
       padding: 0 0 0.5em 0;
-    }
 
-    @media (max-width: 1200px) {
-      .gallery {
-        column-count: 3;
-      }
-    }
 
-    @media (max-width: 1000px) {
-      .gallery {
-        column-count: 2;
+      @media (max-width: 1200px) {
+        .gallery {
+          column-count: 3;
+        }
       }
-    }
 
-    @media (max-width: 600px) {
-      .gallery {
-        column-count: 1;
+      @media (max-width: 1000px) {
+        .gallery {
+          column-count: 2;
+        }
       }
-    }
+
+      @media (max-width: 600px) {
+        .gallery {
+          column-count: 1;
+        }
+      }
   </style>
+
 </head>
 
 <body>
 
   <div class="profile">
     <div class="profile-image">
-      <img src="imgs/avatar.webp" alt="file Image">
+      <img src="avatar.png" alt="file Image">
     </div>
     <div class="profile-info">
       <h1>
@@ -157,7 +166,7 @@
         <span class="tag"> One with Nothing </span>
         <!-- 添加更多标签 -->
       </div>
-      <br/>
+      <br />
       <p> id: dataisland, ip: United States </p>
     </div>
   </div>
