@@ -117,53 +117,26 @@
       margin: 0;
       padding: 0.5em 0;
       font-weight: bold;
-      font-size: 7em;
+      font-size: 1.2em;
       /* 根据实际情况调整 */
     }
 
     .card-text {
       margin: 0;
       padding: 0 0 0.5em 0;
-
-
-      @media (max-width: 1200px) {
-        .gallery {
-          column-count: 3;
-        }
-      }
-
-      @media (max-width: 1000px) {
-        .gallery {
-          column-count: 2;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .gallery {
-          column-count: 1;
-        }
-      }
     }
 
     .modal {
       display: none;
-      /* Hidden by default */
       position: fixed;
-      /* Stay in place */
       z-index: 1;
-      /* Sit on top */
-      padding-top: 100px;
-      /* Location of the box */
+      padding-top: 50px;
       left: 0;
       top: 0;
       width: 100%;
-      /* Full width */
       height: 100%;
-      /* Full height */
       overflow: auto;
-      /* Enable scroll if needed */
       background-color: rgba(255, 255, 255, 0.9);
-      /* White with slight transparency */
     }
 
     .modal-content {
@@ -197,6 +170,8 @@
 
     .modal-image {
       width: 100%;
+      max-height: 70vh;
+      object-fit: cover;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
@@ -214,6 +189,24 @@
       margin: 0;
       font-size: 1em;
       color: #666;
+    }
+
+    @media (max-width: 1200px) {
+      .gallery {
+        column-count: 3;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .gallery {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gallery {
+        column-count: 1;
+      }
     }
   </style>
 
@@ -308,6 +301,7 @@
       }
     }
   </script>
+
 </body>
 
 </html>
