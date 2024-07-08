@@ -1,9 +1,9 @@
 const gallery = document.getElementById('gallery');
 
-fetch('data.json')
+fetch('json/data.min.json')
     .then(response => response.json())
     .then(data => {
-        const images = data.images;
+        const images = data;
 
         // Shuffle the images array
         for (let i = images.length - 1; i > 0; i--) {
@@ -15,7 +15,7 @@ fetch('data.json')
         images.forEach(image => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `<img src="${image.src}" alt="${image.title}" loading="lazy" class="lazy-img">`;
+            card.innerHTML = `<img src="${image.src}" alt="${image.title}" loading="lazy" width="${image.width}" height="${image.height}" class="lazy-img">`;
             gallery.appendChild(card);
         });
 
