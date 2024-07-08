@@ -5,17 +5,17 @@ HTML_FILES=$(wildcard html/*.html)
 MIN_JS_FILES=$(wildcard js/*.min.js)
 MIN_CSS_FILES=$(wildcard css/*.min.css)
 DATA_JSON=json/data.json
-PY_SCRIPT=generate_image_sizes.py
+PY_SCRIPT=parse.py
 
 # Filter out minified files
 NON_MIN_JS_FILES=$(filter-out $(MIN_JS_FILES),$(JS_FILES))
 NON_MIN_CSS_FILES=$(filter-out $(MIN_CSS_FILES),$(CSS_FILES))
 
 # Targets
-all: compress_json minify_js minify_html minify_css
+all: transform minify_js minify_html minify_css
 
-compress_json: $(DATA_JSON) $(PY_SCRIPT)
-	@echo "Generating image sizes and compressing JSON..."
+transform: $(DATA_JSON) $(PY_SCRIPT)
+	@echo "Generating image sizes and compressing JSON and images..."
 	@python $(PY_SCRIPT)
 	@echo "JSON compression completed."
 
@@ -42,7 +42,7 @@ minify_html: $(HTML_FILES)
 
 clean:
 	@echo "Cleaning up minified and compressed files..."
-	@rm -f js/*.min.js css/*.min.css *.min.html $(DATA_JSON_GZ)
+	@rm -f js/*.min.js css/*.min.css *.min.html imgs/*.min.jpg json/data.min.json
 	@echo "Cleanup completed."
 
 .PHONY: all compress_json minify_js minify_css minify_html clean

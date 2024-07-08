@@ -4,42 +4,57 @@ fetch('json/data.min.json')
     .then(response => response.json())
     .then(data => {
         const images = data;
+        let smallImagesLoaded = 0;
+        const totalImages = images.length;
 
-        // Shuffle the images array
-        for (let i = images.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [images[i], images[j]] = [images[j], images[i]];
-        }
+        // Function to render small images
+        const renderImages = () => {
+            images.forEach(image => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                const minSrc = image.src.replace('.jpg', '.min.jpg');
+                card.innerHTML = `<img data-src="${image.src}" src="${minSrc}" alt="${image.title}" loading="lazy" width="${image.width}" height="${image.height}" class="lazy-img">`;
+                gallery.appendChild(card);
 
-        // Generate the image cards in random order
-        images.forEach(image => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `<img src="${image.src}" alt="${image.title}" loading="lazy" width="${image.width}" height="${image.height}" class="lazy-img">`;
-            gallery.appendChild(card);
-        });
+                // Add event listener for modal and fade-in effect
+                const img = card.querySelector('img');
+                img.addEventListener('click', function () {
+                    modal.style.display = "block";
+                    modalImg.src = this.src;
+                    modalTitle.textContent = image.title;
+                    modalText.textContent = image.description;
+                });
 
-        // Get the modal
+                img.addEventListener('load', function () {
+                    this.classList.add('fade-in');
+                    smallImagesLoaded++;
+                    if (smallImagesLoaded == totalImages) {
+                        renderLargeImages();
+                    }
+                });
+            });
+        };
+
+        // Function to load large images
+        const renderLargeImages = () => {
+            document.querySelectorAll('img.lazy-img').forEach(img => {
+                const largeSrc = img.dataset.src;
+                const largeImage = new Image();
+                largeImage.src = largeSrc;
+                largeImage.onload = () => {
+                    img.src = largeSrc;
+                    img.removeAttribute('data-src');
+                };
+            });
+        };
+
+        renderImages();
         const modal = document.getElementById("imageModal");
 
         // Get the image and insert it inside the modal - use its "alt" text as a caption
         const modalImg = document.getElementById("modalImage");
         const modalTitle = document.getElementById("modalTitle");
         const modalText = document.getElementById("modalText");
-
-        document.querySelectorAll('.card img').forEach((img, index) => {
-            img.addEventListener('click', function () {
-                modal.style.display = "block";
-                modalImg.src = this.src;
-                modalTitle.textContent = images[index].title;
-                modalText.textContent = images[index].description;
-            });
-
-            // Add fade-in effect when image loads
-            img.addEventListener('load', function () {
-                this.classList.add('fade-in');
-            });
-        });
 
         // Get the <span> element that closes the modal
         const span = document.getElementsByClassName("close")[0];
