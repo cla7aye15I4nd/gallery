@@ -15,7 +15,7 @@ fetch('data.json')
         images.forEach(image => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `<img src="${image.src}" alt="${image.title}">`;
+            card.innerHTML = `<img src="${image.src}" alt="${image.title}" loading="lazy" class="lazy-img">`;
             gallery.appendChild(card);
         });
 
@@ -33,6 +33,11 @@ fetch('data.json')
                 modalImg.src = this.src;
                 modalTitle.textContent = images[index].title;
                 modalText.textContent = images[index].description;
+            });
+
+            // Add fade-in effect when image loads
+            img.addEventListener('load', function () {
+                this.classList.add('fade-in');
             });
         });
 
