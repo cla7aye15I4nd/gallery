@@ -7,6 +7,9 @@ fetch('json/data.min.json')
         let smallImagesLoaded = 0;
         const totalImages = images.length;
 
+        // shuffle images
+        images.sort(() => Math.random() - 0.5);
+
         // Function to render small images
         const renderImages = () => {
             images.forEach(image => {
