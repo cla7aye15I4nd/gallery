@@ -10,6 +10,18 @@ body {
     padding: 0 2%;
 }
 
+footer {
+    text-align: center;
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
 .profile {
     display: flex;
     align-items: center;
